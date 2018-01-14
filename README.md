@@ -4,6 +4,8 @@
 
 ## how to use it
 
+Basically create a `Command` and call the `Run` function. Take a look:
+
 ```golang
 package main
 
@@ -24,3 +26,4 @@ func main() {
 	}
 }
 ```
+
