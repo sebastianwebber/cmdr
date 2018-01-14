@@ -11,16 +11,23 @@ func TestRunCmd(t *testing.T) {
 		cmd           string
 		args          []string
 		expectedError string
+		timeout       int
 	}{
 		{name: "run empty command", cmd: "", expectedError: "Missing command name"},
 		{name: "run fake command", cmd: "xl8t23hj6__68235896253gf3", expectedError: "Command not found in PATH"},
 		{name: "run valid command with wrong args", cmd: "ls", args: []string{"-lh52313252362336", "2133266324"}, expectedError: "Error running a command"},
 		{name: "this should be ok", cmd: "ls", args: []string{"-lh"}},
+		{name: "this should abort by timemout", cmd: "sleep", args: []string{"5"}, timeout: 2, expectedError: "Error running a command"},
 	}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 
-			_, err := RunCmd(Command{Command: test.cmd, Args: test.args})
+			cmd := Command{Command: test.cmd, Args: test.args}
+
+			if test.timeout > 0 {
+				cmd.Options.Timeout = test.timeout
+			}
+			_, err := RunCmd(cmd)
 
 			if test.expectedError != "" {
 

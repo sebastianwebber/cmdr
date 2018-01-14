@@ -2,10 +2,12 @@ package cmdr
 
 import (
 	"fmt"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 )
 
 func getPATH() []string {
@@ -62,10 +64,38 @@ func runCmd(c Command) (output []byte, err error) {
 		cmd = exec.Command(c.Command, c.Args...)
 	}
 
-	output, err = cmd.CombinedOutput()
+	outReader, _ := cmd.StdoutPipe()
+	err = cmd.Start()
 
 	if err != nil {
+		err = fmt.Errorf("Error starting a command: %v", err)
+		return
+	}
+
+	var timer *time.Timer
+
+	if c.Options.Timeout > 0 {
+
+		execLimit := time.Duration(c.Options.Timeout) * time.Second
+
+		timer = time.AfterFunc(execLimit, func() {
+			cmd.Process.Kill()
+		})
+	}
+
+	output, err = ioutil.ReadAll(outReader)
+
+	if err != nil {
+		err = fmt.Errorf("Error reading output: %v", err)
+	}
+
+	err = cmd.Wait()
+	if err != nil {
 		err = fmt.Errorf("Error running a command: %v", err)
+	}
+
+	if c.Options.Timeout > 0 {
+		timer.Stop()
 	}
 
 	return

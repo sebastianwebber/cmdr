@@ -24,6 +24,9 @@ func main() {
     // You can declare the variable as well:
     // cmd := cmdr.Command{  }
 
+    // Enable timeout if you want (5s by example)
+    cmd.Options.Timeout = 5
+
 
     // To check if the inputed command is valid, use the IsValid function.
     // It checks if the command exists in PATH
@@ -44,7 +47,7 @@ func main() {
 
 ## TODO List
 
-- [ ] Add option to timeout
+- [x] Add option to timeout
 - [ ] Pipe support
 - [ ] add support por multiple commands
 
