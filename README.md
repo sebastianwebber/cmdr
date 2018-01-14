@@ -1,4 +1,6 @@
 # cmdr
+[![Build Status](https://travis-ci.org/sebastianwebber/cmdr.svg?branch=master)](https://travis-ci.org/sebastianwebber/cmdr) [![Go Report Card](https://goreportcard.com/badge/github.com/sebastianwebber/cmdr)](https://goreportcard.com/report/github.com/sebastianwebber/cmdr) [![codecov](https://codecov.io/gh/sebastianwebber/cmdr/branch/master/graph/badge.svg)](https://codecov.io/gh/sebastianwebber/cmdr) 
+
 
 `cmdr` (pronounced  _"commander"_) is a go package to abstract and simplify execution of commands on the operation system. 
 
