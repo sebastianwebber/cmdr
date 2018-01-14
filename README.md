@@ -1,6 +1,6 @@
 # cmdr
 
-`cmdr` (pronounced like a _"commander"_) is a go package to abstract and simplify execution of commands on the operation system. 
+`cmdr` (pronounced  _"commander"_) is a go package to abstract and simplify execution of commands on the operation system. 
 
 ## how to use it
 
