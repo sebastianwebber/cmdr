@@ -41,3 +41,10 @@ func main() {
 }
 ```
 
+
+## TODO List
+
+- [ ] Add option to timeout
+- [ ] Pipe support
+- [ ] add support por multiple commands
+
