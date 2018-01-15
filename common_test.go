@@ -16,7 +16,17 @@ func TestNew(t *testing.T) {
 		args args
 		want Command
 	}{
-		{name: "compare", args: args{useShell: false, cmd: "ls", args: []string{"-lh"}}, want: Command{Options: Options{UseShell: false}, Command: "ls", Args: []string{"-lh"}}},
+		{
+			name: "compare",
+			args: args{
+				useShell: false,
+				cmd:      "ls",
+				args:     []string{"-lh"}},
+			want: Command{
+				Options: Options{UseShell: false},
+				Command: "ls",
+				Args:    []string{"-lh"}},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
