@@ -18,9 +18,9 @@ import (
 )
 
 func main() {
+    
     // New is a helper to create a Command
     // You can call it by a shell like bash if you want (useful to process expressions like *)
-    ///// func New(useShell bool, cmd string, args ...string) Command {}
     cmd := cmdr.New(true, "ls", "-lh", "~/tmp/*")
     
     // You can declare the variable as well:
@@ -50,6 +50,7 @@ func main() {
 ## TODO List
 
 - [x] Add option to timeout
+- [ ] Enable way to group commands
 - [ ] Pipe support
 - [ ] add support por multiple commands
 
