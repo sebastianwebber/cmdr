@@ -83,3 +83,44 @@ func TestCommand_IsValid(t *testing.T) {
 		})
 	}
 }
+
+func TestCommand_Run(t *testing.T) {
+	type fields struct {
+		Command string
+		Args    []string
+		Options Options
+	}
+	tests := []struct {
+		name    string
+		fields  fields
+		want    []byte
+		wantErr bool
+	}{
+		{
+			name: "simple echo",
+			fields: fields{
+				Command: "echo",
+				Args:    []string{"hello"},
+			},
+			want:    []byte("hello\n"),
+			wantErr: false,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := &Command{
+				Command: tt.fields.Command,
+				Args:    tt.fields.Args,
+				Options: tt.fields.Options,
+			}
+			got, err := c.Run()
+			if (err != nil) != tt.wantErr {
+				t.Errorf("Command.Run() error = %v, wantErr %v", err, tt.wantErr)
+				return
+			}
+			if !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Command.Run() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
