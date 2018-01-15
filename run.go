@@ -3,7 +3,6 @@ package cmdr
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"os/exec"
 	"strings"
@@ -37,16 +36,6 @@ func fileExist(name string) bool {
 // RunCmd runs a command in the operating system
 func RunCmd(c Command) ([]byte, error) {
 	return runCmd(c)
-}
-
-func printCommand(cmd *exec.Cmd) {
-	log.Printf("==> Executing: %s\n", strings.Join(cmd.Args, " "))
-}
-
-func printOutput(outs []byte) {
-	if len(outs) > 0 {
-		log.Printf("==> Output: %s\n", string(outs))
-	}
 }
 
 func runCmd(c Command) (output []byte, err error) {
