@@ -38,6 +38,16 @@ func RunCmd(c Command) ([]byte, error) {
 	return runCmd(c)
 }
 
+func makeCmd(c Command) (cmd *exec.Cmd) {
+	if c.Options.UseShell {
+		cmd = exec.Command("bash", "-c", fmt.Sprintf("%s %s", c.Command, strings.Join(c.Args, " ")))
+	} else {
+		cmd = exec.Command(c.Command, c.Args...)
+	}
+
+	return
+}
+
 func runCmd(c Command) (output []byte, err error) {
 
 	err = validateCmd(c)
@@ -45,13 +55,7 @@ func runCmd(c Command) (output []byte, err error) {
 		return
 	}
 
-	var cmd *exec.Cmd
-
-	if c.Options.UseShell {
-		cmd = exec.Command("bash", "-c", fmt.Sprintf("%s %s", c.Command, strings.Join(c.Args, " ")))
-	} else {
-		cmd = exec.Command(c.Command, c.Args...)
-	}
+	cmd := makeCmd(c)
 
 	outReader, _ := cmd.StdoutPipe()
 	err = cmd.Start()

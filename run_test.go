@@ -1,6 +1,8 @@
 package cmdr
 
 import (
+	"os/exec"
+	"reflect"
 	"strings"
 	"testing"
 )
@@ -52,6 +54,48 @@ func TestRunCmd(t *testing.T) {
 					}
 				}
 
+			}
+		})
+	}
+}
+
+func Test_makeCmd(t *testing.T) {
+	type args struct {
+		c Command
+	}
+	tests := []struct {
+		name    string
+		args    args
+		wantCmd *exec.Cmd
+	}{
+		{
+			name: "with shell",
+			args: args{
+				c: Command{
+					Command: "ls",
+					Args:    []string{"-lh"},
+					Options: Options{
+						UseShell: true,
+					},
+				},
+			},
+			wantCmd: exec.Command("bash", "-c", "ls -lh"),
+		},
+		{
+			name: "without shell",
+			args: args{
+				c: Command{
+					Command: "ls",
+					Args:    []string{"-lh"},
+				},
+			},
+			wantCmd: exec.Command("ls", "-lh"),
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotCmd := makeCmd(tt.args.c); !reflect.DeepEqual(gotCmd, tt.wantCmd) {
+				t.Errorf("makeCmd() = %v, want %v", gotCmd, tt.wantCmd)
 			}
 		})
 	}
