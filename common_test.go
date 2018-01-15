@@ -49,9 +49,16 @@ func TestCommand_IsValid(t *testing.T) {
 		want   bool
 	}{
 		{
-			name: "invalid",
+			name: "invalid empty",
 			fields: fields{
 				Command: "",
+			},
+			want: false,
+		},
+		{
+			name: "invalid notfound",
+			fields: fields{
+				Command: "jt23g6emdsbxzgmvksdyg7089 v3g4069tygkahmxzbvuweg5 t",
 			},
 			want: false,
 		},
