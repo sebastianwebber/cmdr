@@ -12,9 +12,9 @@ Basically create a `Command` and call the `Run` function. Take a look:
 package main
 
 import (
-	"fmt"
+    "fmt"
 
-	"github.com/sebastianwebber/cmdr"
+    "github.com/sebastianwebber/cmdr"
 )
 
 func main() {
@@ -32,17 +32,17 @@ func main() {
 
     // To check if the inputed command is valid, use the IsValid function.
     // It checks if the command exists in PATH
-	if cmd.IsValid() {
+    if cmd.IsValid() {
 
         // To execute the command, just call the Run function
-		out, err := cmd.Run()
-		if err != nil {
-			panic(err)
+        out, err := cmd.Run()
+        if err != nil {
+            panic(err)
         }
         
         // here comes the output
-		fmt.Println(string(out))
-	}
+        fmt.Println(string(out))
+    }
 }
 ```
 
