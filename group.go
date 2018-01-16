@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// Strategy contais details about action to take when a
+// Strategy contains details about action to take when a
 // command fail inside a group execution
 type Strategy string
 
