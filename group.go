@@ -34,14 +34,11 @@ func Group(strategy Strategy, cmdList ...Command) (execCount int, err error) {
 
 func abortGroup(cmdList []Command) (execCount int, err error) {
 	for _, cmd := range cmdList {
-		out, cmdErr := cmd.Run()
+		_, cmdErr := cmd.Run()
 
 		if cmdErr != nil {
 			err = fmt.Errorf("Error running a command: %v", cmdErr)
-			message := string(out)
-			if len(out) > 0 {
-				err = fmt.Errorf("%v Output: %v", err, message)
-			}
+
 			break
 		}
 
