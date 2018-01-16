@@ -28,7 +28,7 @@ var (
 	}
 )
 
-func Test_abortGroup(t *testing.T) {
+func Test_abortStrategy(t *testing.T) {
 	type args struct {
 		cmdList []Command
 	}
@@ -57,7 +57,7 @@ func Test_abortGroup(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			gotExecCount, err := abortGroup(tt.args.cmdList)
+			gotExecCount, err := abortStrategy(tt.args.cmdList)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("abortGroup() error = %v, wantErr %v", err, tt.wantErr)
 				return
