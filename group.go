@@ -37,7 +37,11 @@ func abortGroup(cmdList []Command) (execCount int, err error) {
 		out, cmdErr := cmd.Run()
 
 		if cmdErr != nil {
-			err = fmt.Errorf("Error running a command: %v - %v", err, out)
+			err = fmt.Errorf("Error running a command: %v", cmdErr)
+			message := string(out)
+			if len(out) > 0 {
+				err = fmt.Errorf("%v Output: %v", err, message)
+			}
 			break
 		}
 
