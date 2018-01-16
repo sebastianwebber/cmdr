@@ -46,11 +46,42 @@ func main() {
 }
 ```
 
+## Grouping commands
+
+Its possible to group a list of commands:
+
+```golang
+package main
+
+import (
+    "fmt"
+
+    "github.com/sebastianwebber/cmdr"
+)
+
+func main() {
+    // Group options (experimental)
+    total, err := cmdr.Group(
+        cmdr.AbortOnError,
+		cmdr.New(false, "ls", "-lh"),
+		cmdr.New(false, "pwd 123q6236"),
+		cmdr.New(false, "cat", "/etc/hosts"),
+	)
+	fmt.Printf("%d commands executed without error. \n", total)
+
+	if err != nil {
+        fmt.Printf("Houston, we have a problem! %v\n", err)
+	}
+}
+```
+> **This is a work in progress.** 
+
 
 ## TODO List
 
 - [x] Add option to timeout
-- [ ] Enable way to group commands
+- [x] Enable way to group commands
+- [ ] Print output of each command in the group (perhaps adding a `name` option?)
 - [ ] Pipe support
 - [ ] add support por multiple commands
 
