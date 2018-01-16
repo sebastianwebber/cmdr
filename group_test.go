@@ -6,23 +6,23 @@ import (
 
 var (
 	okCmdList = []Command{
-		Command{
+		{
 			Command: "ls",
 			Args:    []string{"-lh"},
 		},
-		Command{
+		{
 			Command: "pwd",
 		},
 	}
 	errCmdList = []Command{
-		Command{
+		{
 			Command: "ls",
 			Args:    []string{"-lh"},
 		},
-		Command{
+		{
 			Command: "agdsgsdgdsa 64323adgsgads  y42382842",
 		},
-		Command{
+		{
 			Command: "pwd",
 		},
 	}
