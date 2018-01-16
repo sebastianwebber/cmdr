@@ -63,15 +63,15 @@ func main() {
     // Group options (experimental)
     total, err := cmdr.Group(
         cmdr.AbortOnError,
-		cmdr.New(false, "ls", "-lh"),
-		cmdr.New(false, "pwd 123q6236"),
-		cmdr.New(false, "cat", "/etc/hosts"),
-	)
-	fmt.Printf("%d commands executed without error. \n", total)
+        cmdr.New(false, "ls", "-lh"),
+        cmdr.New(false, "pwd 123q6236"),
+        cmdr.New(false, "cat", "/etc/hosts"),
+    )
+    fmt.Printf("%d commands executed without error. \n", total)
 
-	if err != nil {
+    if err != nil {
         fmt.Printf("Houston, we have a problem! %v\n", err)
-	}
+    }
 }
 ```
 > **This is a work in progress.** 
