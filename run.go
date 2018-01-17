@@ -1,8 +1,8 @@
 package cmdr
 
 import (
+	"bytes"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"os/exec"
 	"strings"
@@ -57,7 +57,10 @@ func runCmd(c Command) (output []byte, err error) {
 
 	cmd := makeCmd(c)
 
-	outReader, _ := cmd.StdoutPipe()
+	var b bytes.Buffer
+	cmd.Stdout = &b
+	cmd.Stderr = &b
+
 	err = cmd.Start()
 
 	if err != nil {
@@ -76,17 +79,12 @@ func runCmd(c Command) (output []byte, err error) {
 		})
 	}
 
-	output, err = ioutil.ReadAll(outReader)
-
-	if err != nil {
-		err = fmt.Errorf("Error reading output: %v", err)
-	}
-
 	err = cmd.Wait()
 	if err != nil {
 		err = fmt.Errorf("Error running a command: %v", err)
 	}
 
+	output = b.Bytes()
 	if c.Options.Timeout > 0 {
 		timer.Stop()
 	}
