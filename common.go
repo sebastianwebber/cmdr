@@ -14,8 +14,8 @@ type Command struct {
 }
 
 // New creates a Command
-func New(useShell bool, cmd string, args ...string) Command {
-	return Command{
+func New(useShell bool, cmd string, args ...string) *Command {
+	return &Command{
 		Options: Options{UseShell: useShell},
 		Command: cmd,
 		Args:    args,

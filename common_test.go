@@ -14,7 +14,7 @@ func TestNew(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want Command
+		want *Command
 	}{
 		{
 			name: "compare",
@@ -22,7 +22,7 @@ func TestNew(t *testing.T) {
 				useShell: false,
 				cmd:      "ls",
 				args:     []string{"-lh"}},
-			want: Command{
+			want: &Command{
 				Options: Options{UseShell: false},
 				Command: "ls",
 				Args:    []string{"-lh"}},
