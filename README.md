@@ -18,14 +18,14 @@ import (
 )
 
 func main() {
-
-	// short version:
+    // *** short version ***********
 	out, err := cmdr.New(true, "ls", "-lh", "~/tmp2/*").Run()
 	fmt.Println("Output:", string(out))
 	if err != nil {
 		fmt.Println("OOPS:", err.Error())
-	}
+    }
 
+    // *** verbose version ***********
 	// New is a helper to create a Command
 	// You can call it by a shell like bash if you want (useful to process expressions like *)
 	cmd := cmdr.New(true, "ls", "-lh", "~/tmp/*")
