@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"regexp"
 	"strings"
 	"time"
 )
@@ -13,7 +14,17 @@ func getPATH() []string {
 	return strings.Split(os.Getenv("PATH"), ":")
 }
 
+// this regex tests if the cmd starts with: ./, ../, ~/ or /
+var partialPathRegex = regexp.MustCompile(`^((\~|\.{1,})?\/)`)
+
 func findInPath(cmd string) (found bool) {
+
+	// stops validation when a full or
+	// partial path was inputed
+	if partialPathRegex.Match([]byte(cmd)) {
+		found = true
+		return
+	}
 
 	for _, dir := range getPATH() {
 

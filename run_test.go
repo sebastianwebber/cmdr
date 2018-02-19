@@ -100,3 +100,25 @@ func Test_makeCmd(t *testing.T) {
 		})
 	}
 }
+
+func Test_findInPath(t *testing.T) {
+
+	tests := []struct {
+		name      string
+		args      string
+		wantFound bool
+	}{
+		{"partial current dir", "./superscript.sh", true},
+		{"partial previous path", "../superscript.sh", true},
+		{"partial home dir", "~/superscript.sh", true},
+		{"full prefix", "/app/test/superscript.sh", true},
+		{"random non existing script", "shfjasfhkjsafgasjajsmvxbsjty jaghh", false},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if gotFound := findInPath(tt.args); gotFound != tt.wantFound {
+				t.Errorf("findInPath() = %v, want %v", gotFound, tt.wantFound)
+			}
+		})
+	}
+}
