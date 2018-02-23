@@ -5,10 +5,8 @@ import (
 	"unicode"
 )
 
-// var quotes = [...]rune{`'`, `"`}
-
 // Parse parses a string
-// resulting into a command
+// resulting into a *Command
 func Parse(cmd string) *Command {
 
 	var (
