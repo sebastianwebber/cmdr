@@ -33,6 +33,9 @@ func main() {
 	// You can declare the variable as well:
 	// cmd := cmdr.Command{  }
 
+	// You can also parse a command into a Command:
+	// cmd := cmdr.Parse(`psql -At -c 'select now();'`)
+
 	// Enable timeout if you want (5s by example)
 	cmd.Options.Timeout = 5
 
