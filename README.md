@@ -6,6 +6,12 @@
 
 ## how to use it
 
+First things first:
+```
+go get -u -v go get github.com/sebastianwebber/cmdr
+```
+
+
 Basically create a `Command` and call the `Run` function. Take a look:
 
 ```golang
