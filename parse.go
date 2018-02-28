@@ -26,22 +26,23 @@ func Parse(cmd string) *Command {
 
 // by @jg_19 on https://t.me/go_br
 func parseComplex(cmd string) []string {
-	start := false
+	lastRune := rune(0)
+	cControl := false
 	startRune := rune(0)
-	f := func(c rune) bool {
+	f := func(c rune) (r bool) {
 		switch {
-		case c == startRune:
+		case startRune == c:
 			startRune = 0
-			start = !start
-			return true
-		case (c == rune('\'') || c == rune('"')) && !start:
+			r = cControl
+		case (c == rune('\'') || c == rune('"')) && startRune == 0:
 			startRune = c
-			start = !start
-			return true
+			cControl = unicode.IsSpace(lastRune)
+			r = cControl
 		default:
-			return unicode.IsSpace(c) && !start
+			r = unicode.IsSpace(c) && startRune == 0
 		}
+		lastRune = c
+		return
 	}
-
 	return strings.FieldsFunc(cmd, f)
 }
