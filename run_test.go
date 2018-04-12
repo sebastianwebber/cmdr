@@ -79,7 +79,7 @@ func Test_makeCmd(t *testing.T) {
 					},
 				},
 			},
-			wantCmd: exec.Command("bash", "-c", "ls -lh"),
+			wantCmd: exec.Command("bash", "-c", "ls '-lh'"),
 		},
 		{
 			name: "without shell",

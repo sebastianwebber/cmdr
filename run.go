@@ -51,7 +51,7 @@ func RunCmd(c Command) ([]byte, error) {
 
 func makeCmd(c Command) (cmd *exec.Cmd) {
 	if c.Options.UseShell {
-		cmd = exec.Command("bash", "-c", fmt.Sprintf("%s %s", c.Command, strings.Join(c.Args, " ")))
+		cmd = exec.Command("bash", "-c", fmt.Sprintf(`%s '%s'`, c.Command, strings.Join(c.Args, `' '`)))
 	} else {
 		cmd = exec.Command(c.Command, c.Args...)
 	}
