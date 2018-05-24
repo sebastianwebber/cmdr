@@ -8,9 +8,10 @@ type Options struct {
 
 // Command defines how to call a program
 type Command struct {
-	Command string
-	Args    []string
-	Options Options
+	Command     string
+	Args        []string
+	Options     Options
+	Description string
 }
 
 // New creates a Command
