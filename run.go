@@ -61,9 +61,10 @@ func makeCmd(c Command) (cmd *exec.Cmd) {
 
 func runCmd(c Command) (output []byte, err error) {
 
-	err = validateCmd(c)
-	if err != nil {
-		return
+	if c.Options.CheckPath {
+		if err := validateCmd(c); err != nil {
+			return nil, fmt.Errorf("Check PATH failed: %v", err)
+		}
 	}
 
 	cmd := makeCmd(c)
@@ -96,6 +97,7 @@ func runCmd(c Command) (output []byte, err error) {
 	}
 
 	output = b.Bytes()
+
 	if c.Options.Timeout > 0 {
 		timer.Stop()
 	}

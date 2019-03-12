@@ -2,8 +2,9 @@ package cmdr
 
 // Options contains Command configuration
 type Options struct {
-	UseShell bool
-	Timeout  int
+	CheckPath bool
+	UseShell  bool
+	Timeout   int
 }
 
 // Command defines how to call a program
